@@ -1,0 +1,45 @@
+Benchmarking with PHP build: build/php-7.2.15-pgo-woo/bin/php
+PHP options: -d zend_extension=opcache.so
+
+This is ApacheBench, Version 2.3 <$Revision: 1843412 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+
+
+Server Software:        
+Server Hostname:        localhost
+Server Port:            5000
+
+Document Path:          /
+Document Length:        343796 bytes
+
+Concurrency Level:      1
+Time taken for tests:   60.160 seconds
+Complete requests:      148
+Failed requests:        0
+Total transferred:      50922952 bytes
+HTML transferred:       50881808 bytes
+Requests per second:    2.46 [#/sec] (mean)
+Time per request:       406.489 [ms] (mean)
+Time per request:       406.489 [ms] (mean, across all concurrent requests)
+Transfer rate:          826.62 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:   380  406   8.7    406     470
+Waiting:      339  364   8.2    364     426
+Total:        380  406   8.7    406     470
+
+Percentage of the requests served within a certain time (ms)
+  50%    406
+  66%    409
+  75%    411
+  80%    412
+  90%    415
+  95%    418
+  98%    420
+  99%    421
+ 100%    470 (longest request)
