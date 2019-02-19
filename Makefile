@@ -44,6 +44,24 @@ build/php-$(PHP_VERSION)-clang-optimized : $(PHP_SOURCES)
 			./configure --prefix=$(abspath $@) --with-openssl --with-mysqli --with-zlib &&\
 			make clean && make -j`nproc` && make install'
 
+build/php-$(PHP_VERSION)-pgo : $(PHP_SOURCES)
+	cd $(PHP_SOURCES) && \
+		CFLAGS='-march=native -O2' \
+		CXXFLAGS="$$CFLAGS" \
+		sh -c '\
+			./configure --prefix=$(abspath $@) --with-openssl --with-mysqli --with-zlib &&\
+			make clean && make -j`nproc` prof-gen && make install'
+
+prof-use :
+	cd $(PHP_SOURCES) && \
+		CFLAGS='-march=native -O2' \
+		CXXFLAGS="$$CFLAGS" \
+		sh -c '\
+			find -name '*.gcda' | xargs -r tar cf profiles.tar &&\
+			make clean &&\
+			tar xvf profiles.tar &&\
+			make -j`nproc` prof-use && make install'
+
 $(PHP_SOURCES) :
 	rm -rf $@~
 	mkdir -p $@~
