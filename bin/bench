@@ -11,6 +11,7 @@ from sys import stderr, stdout
 def main():
     parser = ArgumentParser()
     parser.add_argument('--php', '-p', type=str, required=True)
+    parser.add_argument('--timelimit', '-t', type=float, default=10.)
     args, php_options = parser.parse_known_args()
     print('Benchmarking with PHP build:', args.php)
     print('PHP options:', ' '.join(php_options))
@@ -20,7 +21,7 @@ def main():
     url = 'http://localhost:5000/'
     try:
         wait_for_url(url)
-        check_call(['ab', '-t', '10', url])
+        check_call(['ab', '-t', str(args.timelimit), url])
     finally:
         php.kill()
 

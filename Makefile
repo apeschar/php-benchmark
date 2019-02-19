@@ -14,12 +14,35 @@ EXEC_WP_CLI := $(abspath build/php-$(PHP_VERSION)-defaults/bin/php) $(abspath $(
 all : defaults wordpress
 
 defaults : build/php-$(PHP_VERSION)-defaults
+optimized : build/php-$(PHP_VERSION)-optimized
+clang-optimized : build/php-$(PHP_VERSION)-clang-optimized
 
 build/php-$(PHP_VERSION)-defaults : $(PHP_SOURCES)
 	cd $(PHP_SOURCES) && ./configure --prefix=$(abspath $@) --with-openssl --with-mysqli --with-zlib
 	$(MAKE) -C $(PHP_SOURCES) clean
 	$(MAKE) -C $(PHP_SOURCES) -j$(shell nproc)
 	$(MAKE) -C $(PHP_SOURCES) install
+
+env :
+	env
+
+build/php-$(PHP_VERSION)-optimized : $(PHP_SOURCES)
+	cd $(PHP_SOURCES) && \
+		CFLAGS='-march=native -O2' \
+		CXXFLAGS="$$CFLAGS" \
+		sh -c '\
+			./configure --prefix=$(abspath $@) --with-openssl --with-mysqli --with-zlib &&\
+			make clean && make -j`nproc` && make install'
+
+build/php-$(PHP_VERSION)-clang-optimized : $(PHP_SOURCES)
+	cd $(PHP_SOURCES) && \
+		CC=clang \
+		CXX=clang++ \
+		CFLAGS='-march=native -O2' \
+		CXXFLAGS="$$CFLAGS" \
+		sh -c '\
+			./configure --prefix=$(abspath $@) --with-openssl --with-mysqli --with-zlib &&\
+			make clean && make -j`nproc` && make install'
 
 $(PHP_SOURCES) :
 	rm -rf $@~
