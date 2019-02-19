@@ -44,7 +44,7 @@ build/php-$(PHP_VERSION)-clang-optimized : $(PHP_SOURCES)
 			./configure --prefix=$(abspath $@) --with-openssl --with-mysqli --with-zlib &&\
 			make clean && make -j`nproc` && make install'
 
-build/php-$(PHP_VERSION)-pgo : $(PHP_SOURCES)
+build/php-$(PHP_VERSION)-pgo% : $(PHP_SOURCES)
 	cd $(PHP_SOURCES) && \
 		CFLAGS='-march=native -O2' \
 		CXXFLAGS="$$CFLAGS" \
