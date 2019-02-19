@@ -1,0 +1,45 @@
+Benchmarking with PHP build: build/php-7.2.15-clang-optimized/bin/php
+PHP options: 
+
+This is ApacheBench, Version 2.3 <$Revision: 1843412 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+
+
+Server Software:        
+Server Hostname:        localhost
+Server Port:            5000
+
+Document Path:          /
+Document Length:        10633 bytes
+
+Concurrency Level:      1
+Time taken for tests:   10.006 seconds
+Complete requests:      134
+Failed requests:        0
+Total transferred:      1457652 bytes
+HTML transferred:       1424822 bytes
+Requests per second:    13.39 [#/sec] (mean)
+Time per request:       74.672 [ms] (mean)
+Time per request:       74.672 [ms] (mean, across all concurrent requests)
+Transfer rate:          142.26 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:    73   75   1.2     74      84
+Waiting:       68   70   1.1     70      78
+Total:         73   75   1.2     74      84
+
+Percentage of the requests served within a certain time (ms)
+  50%     74
+  66%     75
+  75%     75
+  80%     75
+  90%     76
+  95%     77
+  98%     77
+  99%     78
+ 100%     84 (longest request)
