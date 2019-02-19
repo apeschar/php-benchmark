@@ -23,7 +23,7 @@ def main():
         wait_for_url(url)
         check_call(['ab', '-t', str(args.timelimit), url])
     finally:
-        php.kill()
+        php.send_signal(2)
 
 
 def wait_for_url(url):
